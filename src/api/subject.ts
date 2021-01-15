@@ -3,9 +3,9 @@ import { Subject, SubjectMod } from "../database";
 
 export var router = Router();
 
-router.get('/all', (req, res) => {
-    SubjectMod.find().exec()
-        .then(res.send);
+router.get('/all', async (req, res) => {
+    var sub = await SubjectMod.find().exec();
+    res.send(sub);
 });
 
 router.get('/:id', async (req, res) => {
