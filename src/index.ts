@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import './database';
 
 export var app = express();
 
@@ -16,3 +17,4 @@ app.use(session({
 app.use('/api', require('./api'))
 
 app.listen(3001);
+console.log(' > Listening on Port 3001');

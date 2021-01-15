@@ -1,27 +1,4 @@
-export interface Test {
-    name: string;
-    topic: string;
-    date: Date;
-    /** Shows how much this test effects your grade 
-     * @example Doubled rating
-     * test.rating = 2
-    */
-    type: 'Big' | 'Smal';
-    /** A number ranging from `0` to `15` that stands for the number of points you got in the Test*/
-    points: number;
-    /**
-     */
-}
-
-export interface Subject {
-    name: string;
-    color: string;
-    id: string;
-    /**
-     * A List of all tests written in this Subject
-     */
-    entr: Test[];
-}
+import { Subject } from "./database";
 
 export function parse(data: any[]) {
     for (const sub of data) {
