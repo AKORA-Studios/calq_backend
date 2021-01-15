@@ -1,8 +1,18 @@
 import express from 'express';
+import session from 'express-session';
 
-var app = express();
+export var app = express();
 
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
+app.use(session({
+    secret: 'LAMO',
+    saveUninitialized: true,
+    resave: true
+}))
 
-app.use((req, res) => {
-    res.send({ name: "QwQ" })
-})
+app.use('/api', require('./api'))
+
+app.listen(3001);

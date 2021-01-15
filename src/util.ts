@@ -1,10 +1,3 @@
-export interface RawTest {
-    name: string;
-    topic: string;
-    date: string;
-    type: 'Big' | 'Smal';
-    points: number;
-}
 export interface Test {
     name: string;
     topic: string;
@@ -20,12 +13,6 @@ export interface Test {
      */
 }
 
-export interface RawSubject {
-    name: string;
-    color: string;
-    id: string;
-    entr: RawTest[];
-}
 export interface Subject {
     name: string;
     color: string;
@@ -36,7 +23,7 @@ export interface Subject {
     entr: Test[];
 }
 
-export function parse(data: RawSubject[]) {
+export function parse(data: any[]) {
     for (const sub of data) {
         for (const entr of sub.entr) {
             console.log(entr.date);
