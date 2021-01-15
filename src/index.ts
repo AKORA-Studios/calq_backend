@@ -1,9 +1,11 @@
 import express from 'express';
 import session from 'express-session';
+import cors from 'cors';
 import './database';
 
 export var app = express();
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({
     extended: true
