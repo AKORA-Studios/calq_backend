@@ -2,21 +2,20 @@ import { Router } from "express";
 import { Subject, SubjectMod } from "../database";
 
 export var router = Router();
-const { get, delete: del, put, patch, post, use } = router;
 
-get('/all', (req, res) => {
+router.get('/all', (req, res) => {
     SubjectMod.find().exec()
         .then(res.send);
 });
 
-get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     var data = await SubjectMod.findById(req.params.id);
 
     if (!data) return res.sendStatus(404);
     return res.send(data);
 })
 
-patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     var patch = req.body as Subject;
 
     var data = await SubjectMod.findById(req.params.id);
@@ -30,7 +29,7 @@ patch('/:id', async (req, res) => {
         .catch(() => res.sendStatus(500))
 });
 
-del('/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     var data = await SubjectMod.findById(req.params.id);
     if (!data) return res.sendStatus(404);
 
@@ -39,7 +38,7 @@ del('/:id', async (req, res) => {
         .catch(() => res.sendStatus(500))
 });
 
-post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     var data = req.body as Subject;
 
     SubjectMod.create(data)
@@ -47,6 +46,6 @@ post('/', async (req, res) => {
         .catch(() => res.sendStatus(500))
 });
 
-use('/:id/tests', require('./test'))
+router.use('/:id/tests', require('./test'))
 
 module.exports = router;
