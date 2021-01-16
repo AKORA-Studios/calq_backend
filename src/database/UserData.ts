@@ -1,4 +1,4 @@
-import { Document, model, Model, Schema } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
 export interface Test {
     /** The name of the Test */
@@ -16,7 +16,7 @@ export interface Test {
 }
 export interface TestDoc extends Test, Document { }
 
-export const TestSchema = new Schema({
+const TestSchema = new Schema({
     name: String,
     /** Tegs like `trigonometry, geometry, probability, orally`. */
     tags: [String],
@@ -30,4 +30,37 @@ export const TestSchema = new Schema({
     points: Number
 });
 
-//export const TestMod = model<TestDoc>('tests', TestSchema);
+
+
+
+
+
+
+export interface Subject {
+    /** Name of the Subject */
+    name: string;
+    /** A List of all tests written in this Subject */
+    tests: Test[];
+}
+export interface SubjectDoc extends Subject, Document { }
+
+const SubjectSchema = new Schema({
+    /** Name of the Subject */
+    name: String,
+    /** A List of all tests written in this Subject */
+    tests: [TestSchema]
+});
+
+
+export interface UserData {
+    id?: any;
+    userID: string;
+    data: Subject[]
+}
+export interface UserDataDoc extends UserData, Document { }
+export const UserDataScheme = new Schema({
+    userID: String,
+    data: [SubjectSchema]
+})
+
+export const UserDataMod = model<UserDataDoc>('userdata', UserDataScheme);
