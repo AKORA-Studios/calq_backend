@@ -8,7 +8,7 @@ function user(req: Request): Promise<UserDoc | null> {
 }
 
 function getData(req: Request): Promise<UserDataDoc[] | null> {
-    return UserDataMod.find({ userID: req.params.userID }).exec()
+    return UserDataMod.findOne({ userID: req.params.userID }).exec()
 }
 
 router.get('/', async (req, res) => {

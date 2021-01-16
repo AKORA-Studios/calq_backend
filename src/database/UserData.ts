@@ -14,7 +14,25 @@ export interface Test {
     /** A number ranging from `0` to `15` that stands for the number of points you got in the Test. */
     points: number;
 }
-export interface TestDoc extends Test, Document { }
+
+
+export interface Subject {
+    /** Name of the Subject */
+    name: string;
+    /** A List of all tests written in this Subject */
+    tests: Test[];
+}
+
+
+export interface UserData {
+    id?: any;
+    userID: string;
+    data: Subject[]
+}
+export interface UserDataDoc extends UserData, Document { }
+
+
+
 
 const TestSchema = new Schema({
     name: String,
@@ -31,19 +49,6 @@ const TestSchema = new Schema({
 });
 
 
-
-
-
-
-
-export interface Subject {
-    /** Name of the Subject */
-    name: string;
-    /** A List of all tests written in this Subject */
-    tests: Test[];
-}
-export interface SubjectDoc extends Subject, Document { }
-
 const SubjectSchema = new Schema({
     /** Name of the Subject */
     name: String,
@@ -52,12 +57,6 @@ const SubjectSchema = new Schema({
 });
 
 
-export interface UserData {
-    id?: any;
-    userID: string;
-    data: Subject[]
-}
-export interface UserDataDoc extends UserData, Document { }
 export const UserDataScheme = new Schema({
     userID: String,
     data: [SubjectSchema]
