@@ -43,6 +43,6 @@ router.post('/', async (req, res) => {
         .catch(() => res.sendStatus(500))
 });
 
-router.use('/:userID/data', require('./data'))
+router.use('/', require('./data'))
 
 module.exports = router;
