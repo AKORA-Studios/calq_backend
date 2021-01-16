@@ -7,7 +7,7 @@ function user(req: Request): Promise<UserDoc | null> {
     return UserMod.findById(req.params.userID).exec()
 }
 
-function getData(req: Request): Promise<UserDataDoc[] | null> {
+function getData(req: Request): Promise<UserDataDoc | null> {
     return UserDataMod.findOne({ userID: req.params.userID }).exec()
 }
 

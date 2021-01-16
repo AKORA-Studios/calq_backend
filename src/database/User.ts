@@ -6,21 +6,8 @@ export interface User {
     username: string;
     password: string;
     id?: any;
-    settings: SubjectSetting[];
 }
 export interface UserDoc extends User, Document { }
-
-export type SubjectType = 'MA' | 'ENG' | 'DE' | 'CHE' | 'FRZ' | 'BIO' | 'SPA' | 'GEO' | 'INF' | 'ETH' | 'KU' | 'MU';
-export interface SubjectSetting {
-    name: SubjectType;
-    color: string;
-    active: boolean;
-}
-const SubjectSettingSchema = new Schema({
-    name: String,
-    color: String,
-    active: Boolean
-});
 
 export const UserSchema = new Schema({
     username: {
@@ -30,10 +17,6 @@ export const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
-    },
-    settings: {
-        type: [SubjectSettingSchema],
         required: true
     }
 });

@@ -15,10 +15,11 @@ export interface Test {
     points: number;
 }
 
-
+export type SubjectType = 'MA' | 'ENG' | 'DE' | 'CHE' | 'FRZ' | 'BIO' | 'SPA' | 'GEO' | 'INF' | 'ETH' | 'KU' | 'MU';
 export interface Subject {
     /** Name of the Subject */
-    name: string;
+    name: SubjectType;
+    color: string;
     /** A List of all tests written in this Subject */
     tests: Test[];
 }
@@ -52,6 +53,7 @@ const TestSchema = new Schema({
 const SubjectSchema = new Schema({
     /** Name of the Subject */
     name: String,
+    color: String,
     /** A List of all tests written in this Subject */
     tests: [TestSchema]
 });
