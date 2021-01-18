@@ -3,6 +3,13 @@ import { User, UserMod } from "../database";
 
 export var router = Router();
 
+router.get('/', async (req, res) => {
+    var data = await UserMod.findById(req.session.userID);
+
+    if (!data) return res.sendStatus(404);
+    return res.send(data);
+})
+
 
 router.get('/:userID', async (req, res) => {
     var data = await UserMod.findById(req.params.userID);
@@ -42,7 +49,5 @@ router.post('/', async (req, res) => {
         .then(() => res.sendStatus(200))
         .catch(() => res.sendStatus(500))
 });
-
-router.use('/', require('./data'))
 
 module.exports = router;

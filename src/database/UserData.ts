@@ -64,4 +64,4 @@ export const UserDataScheme = new Schema({
     data: [SubjectSchema]
 })
 
-export const UserDataMod = model<UserDataDoc>('userdata', UserDataScheme);
+export const UserDataMod = model<UserDataDoc>('userdatas', UserDataScheme);

@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { SubjectMod, Test } from "../database";
+import { Test } from "../database";
 
 export var router = Router();
 
+/*
 router.get('/all', async (req, res) => {
     var data = await SubjectMod.findById(req.params.id);
     if (!data) return res.sendStatus(404);
@@ -20,5 +21,6 @@ router.post('/', async (req, res) => {
         .then(() => res.sendStatus(200))
         .catch(() => res.sendStatus(500))
 })
+*/
 
 module.exports = router;

@@ -11,9 +11,9 @@ function getData(id: string): Promise<UserDataDoc | null> {
     return UserDataMod.findOne({ userID: id }).exec()
 }
 
-router.get('/:userID/data/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
-        var data = await getData(req.params.userID);
+        var data = await getData(req.session.userID + "");
 
         if (!data) return res.sendStatus(404);
         res.send(data);

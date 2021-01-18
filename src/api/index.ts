@@ -1,10 +1,43 @@
 import { Router } from "express";
-import { UserData, UserDataMod, UserMod } from "../database";
+import { User, UserData, UserDataMod, UserMod } from "../database";
 
 export var router = Router();
 
+router.get('/', async function (req, res, next) {
+    if (req.session.views) {
+        req.session.views++
+        if (req.session.views > 5) {
+            res.sendStatus(200);
+            console.log(req.session.views)
+        } else {
+            res.send(req.session)
+        }
+    } else {
+        req.session.views = 1
+        return res.sendStatus(200)
+    }
+})
+
+
+router.post('/login', async (req, res) => {
+    const data = req.body as User;
+    const user = await UserMod.findOne(data);
+    if (!user) return res.sendStatus(403);
+
+    req.session.userID = user.id;
+    req.session.save();
+
+    res.sendStatus(200);
+});
+
+router.use((req, res, next) => {
+    if (!req.session.userID) return res.sendStatus(403);
+
+    next();
+})
 
 router.use('/user', require('./user'));
+router.use('/data', require('./data'))
 router.get('/initial', (req, res) => {
     UserMod.create({
         username: "Test",
